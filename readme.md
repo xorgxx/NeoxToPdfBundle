@@ -21,7 +21,7 @@ You will need to register to one or more API services, they will provide api key
   
 | Provider                             | env                                                                 | Freemium | Documentation                                       |
 |--------------------------------------|---------------------------------------------------------------------|----------|-----------------------------------------------------|
-| [PDF Layer](http://www.pdflayer.com) | PDFLAYER_DSN=pdflayer://opps:[api-key]@api.pdflayer.com/api/convert | v        | [documentation](https://pdflayer.com/documentation) |
+| [PDF-Layer](http://www.pdflayer.com) | PDFLAYER_DSN=pdflayer://opps:[api-key]@api.pdflayer.com/api/convert | v        | [documentation](https://pdflayer.com/documentation) |
 
 
 ## How ?
