@@ -17,8 +17,11 @@ Install the bundle for Composer !! as is still on beta version !!
 
 ## Requirement !!!
 You will need to register to one or more API services, they will provide api key:
-* Currently, we have implemented only one provider if you need more PR on [GitHub](https://github.com/xorgxx?tab=repositories). we will implement more in future
-  - [PDF Layer](http://www.pdflayer.com)
+* Currently, we have implemented only one provider if you need more PR on [GitHub](https://github.com/xorgxx?tab=repositories). we will implement more in the future
+  
+| Provider                             | env                                                                 | Freemium | Documentation                                       |
+|--------------------------------------|---------------------------------------------------------------------|----------|-----------------------------------------------------|
+| [PDF Layer](http://www.pdflayer.com) | PDFLAYER_DSN=pdflayer://opps:[api-key]@api.pdflayer.com/api/convert | v        | [documentation](https://pdflayer.com/documentation) |
 
 ## How ?
 in order, you will need to add in .env Dsn for ex: pdflayer
