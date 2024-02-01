@@ -2,7 +2,7 @@
 This bundle provides service multi API to Pdf-convert in your application.
 Its main goal is to make it simple for you to manage integration additional tools!
 
-## Installation BETA VERSION !!
+## Installation BETA VERSION !! 
 Install the bundle for Composer !! as is still on beta version !!
 
 ````
