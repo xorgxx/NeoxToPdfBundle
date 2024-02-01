@@ -32,6 +32,7 @@ in order, you will need to add in .env Dsn for ex: pdflayer
 then add in config/packages/neox_to_pdf.yaml
 ````php
   neox_to_pdf:
+      directory_save: "/public/neoxPdf/"
       services:
           pdflayer: "%env(PDFLAYER_DSN)%"
 ````
@@ -70,7 +71,8 @@ then add in config/packages/neox_to_pdf.yaml
 ## build in command :
   - display_pdf   | give back Pdf in browser
   - download_pdf  | download Pdf file
-  - later will add "stream" to give possibility to send by email or save in directory ...
+  - getStream     | get as string
+  - file_pdf      | get as BinaryFileResponse
 
 
 ## Contributing

@@ -29,6 +29,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
+                ->scalarNode('directory_save')->defaultValue("/public/neoxPdf/")->end()
                 ->arrayNode('services')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('pdflayer')->defaultValue("")->end()

@@ -4,6 +4,7 @@
     
     use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
     use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
     use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
     use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -120,6 +121,34 @@
             $response->headers->set('Content-Type', 'application/pdf');
             
             return $response;
+        }
+        
+        public function getStreamPdf(): string
+        {
+            return $this->pdf;
+        }
+        
+        public function file_pdf($file_name = ''): BinaryFileResponse
+        {
+            $file_name = (empty($file_name)) ? 'pdf' : $file_name;
+            
+            if (empty($this->pdf)) {
+                throw new NotFoundHttpException('No PDF has been generated');
+            }
+            $path           = $this->parameterBag->get('neox_to_pdf.directory_save');
+            $pdfDirectory   = $this->parameterBag->get('kernel.project_dir') . $path ?? '/public/pdf/';
+            $pdfFilePath    = $pdfDirectory . $file_name . '.pdf';
+            
+            // Vérifier si le répertoire existe, sinon le créer
+            if (!file_exists($pdfDirectory)) {
+                mkdir($pdfDirectory, 0777, true);
+            }
+            
+            // Écrire le contenu du PDF dans le fichier
+            file_put_contents($pdfFilePath, $this->pdf);
+            
+            // Retourner le fichier en tant que réponse
+            return new BinaryFileResponse($pdfFilePath);
         }
         
         private function getSchema(): string | array | null

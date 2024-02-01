@@ -1,17 +1,16 @@
 <?php
     
     /*
-     * This file is part of the Symfony package.
+     * This file is base on the Symfony package.
      *
      * (c) Fabien Potencier <fabien@symfony.com>
      *
      * For the full copyright and license information, please view the LICENSE
      * file that was distributed with this source code.
      */
+    
     namespace NeoxToPdf\NeoxToPdfBundle\NeoxPdf;
     
-//    use Symfony\Component\Notifier\Exception\InvalidArgumentException;
-//    use Symfony\Component\Notifier\Exception\MissingRequiredOptionException;
     use Symfony\Component\BrowserKit\Exception\InvalidArgumentException;
     use Symfony\Component\Translation\Exception\MissingRequiredOptionException;
     
