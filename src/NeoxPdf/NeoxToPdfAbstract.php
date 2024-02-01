@@ -25,6 +25,11 @@
         
         protected function build_request(): string
         {
+            // get class name
+            $fullClassName      = get_class($this);
+            $className          = str_replace('Service', '', basename(str_replace('\\', '/', $fullClassName)));
+            $this->schema       = strtolower($className);
+            
             $dsn    = $this->getSchema();
             $dsn    = new Dsn($dsn);
             
@@ -136,12 +141,14 @@
                 throw new NotFoundHttpException('No PDF has been generated');
             }
             $path           = $this->parameterBag->get('neox_to_pdf.directory_save');
-            $pdfDirectory   = $this->parameterBag->get('kernel.project_dir') . $path ?? '/public/pdf/';
+            $pdfDirectory   = $this->parameterBag->get('kernel.project_dir') . $path ;
             $pdfFilePath    = $pdfDirectory . $file_name . '.pdf';
             
             // Vérifier si le répertoire existe, sinon le créer
-            if (!file_exists($pdfDirectory)) {
-                mkdir($pdfDirectory, 0777, true);
+            if (!is_dir($pdfDirectory)) {
+                if (!mkdir($pdfDirectory, 0777, true) && !is_dir($pdfDirectory)) {
+                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $pdfDirectory));
+                }
             }
             
             // Écrire le contenu du PDF dans le fichier

@@ -24,7 +24,6 @@
         public function __construct(HttpClientInterface $httpClient, ParameterBagInterface $parameterBag)
         {
             parent::__construct($httpClient, $parameterBag);
-            $this->schema = "pdflayer";
         }
         
         /**
