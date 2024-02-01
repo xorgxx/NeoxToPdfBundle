@@ -28,6 +28,7 @@
     "composer/semver": "^3.0",
     "doctrine/doctrine-bundle": "^2.5.0",
     "doctrine/orm": "^2.10.0",
+    "symfony/contracts": "^3.4",
     "symfony/maker-bundle": "^1.51",
     "symfony/phpunit-bridge": "^6.3|^7.0",
     "symfony/security-core": "^6.3|^7.0",

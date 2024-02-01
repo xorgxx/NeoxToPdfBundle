@@ -1,4 +1,4 @@
-# NeoxToPdfBundle { Symfony 6 }
+# NeoxPdfBundle { Symfony 6 }
 This bundle provides service multi API to Pdf-convert in your application.
 Its main goal is to make it simple for you to manage integration additional tools!
 
@@ -6,9 +6,9 @@ Its main goal is to make it simple for you to manage integration additional tool
 Install the bundle for Composer !! as is still on beta version !!
 
 ````
-  composer require xorgxx/neox-topdf-bundle
+  composer require xorgxx/neox-pdf-bundle
   or 
-  composer require xorgxx/neox-topdf-bundle:0.*
+  composer require xorgxx/neox-pdf-bundle:0.*
 ````
 
 **NOTE:** _You may need to use [ symfony composer dump-autoload ] to reload autoloading_
@@ -35,6 +35,7 @@ then add in config/packages/neox_to_pdf.yaml
       services:
           pdflayer: "%env(PDFLAYER_DSN)%"
 ````
+** important : s c:c & c dump-autoload **
 
 ## Controller
 ````php
