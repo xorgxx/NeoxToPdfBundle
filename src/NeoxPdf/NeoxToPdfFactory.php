@@ -8,8 +8,8 @@
     class NeoxToPdfFactory
     {
         public function __construct(
-            readonly HttpClientInterface $httpClient,
-            readonly ParameterBagInterface $parameterBag,
+            protected readonly HttpClientInterface $httpClient,
+            protected readonly ParameterBagInterface $parameterBag,
         ) {}
         public function pdfLayerService( ): pdfLayerService
         {

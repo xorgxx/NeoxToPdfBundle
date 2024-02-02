@@ -11,7 +11,6 @@
     
     class pdfLayerService extends NeoxToPdfAbstract implements neoxPdfInterface
     {
-        public readonly HttpClientInterface $httpClient;
         
         /**
          * method:  class construction

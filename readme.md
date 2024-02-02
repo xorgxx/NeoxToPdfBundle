@@ -37,7 +37,7 @@ then add in config/packages/neox_to_pdf.yaml
   neox_to_pdf:
       directory_save: "/public/neoxPdf/"
       services:
-          pdflayer: "%env(PDFLAYER_DSN)%"
+          pdfLayer: "%env(PDFLAYER_DSN)%"
 ````
 ** important : s c:c & c dump-autoload **
 

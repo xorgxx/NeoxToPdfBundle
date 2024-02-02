@@ -24,7 +24,7 @@
         protected TraceableResponse $response;
         protected string $pdf;
         
-        public function __construct(readonly HttpClientInterface $httpClient, readonly ParameterBagInterface $parameterBag) {}
+        public function __construct(private readonly HttpClientInterface $httpClient, private readonly ParameterBagInterface $parameterBag) {}
         
         protected function build_request(): string
         {
