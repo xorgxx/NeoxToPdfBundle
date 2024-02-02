@@ -20,6 +20,7 @@
          **/
         protected array $postData   = array();
         protected array $query      = array();
+        protected Response $response;
         protected string $pdf;
         
         public function __construct(readonly HttpClientInterface $httpClient, readonly ParameterBagInterface $parameterBag) {}
@@ -47,20 +48,23 @@
          * @return void
          * @throws TransportExceptionInterface
          */
-        protected function doApi(string $request, array $postData): string
+        protected function doApi(string $request, array $postData): self
         {
             $response = $this->httpClient->request('POST', $request, [
                 'body' => http_build_query($postData),
             ]);
             
             try {
-                $this->pdf = $response->getContent();
+                $this->Response     = $response;
+                $this->pdf          = $response->getContent();
+                
             } catch (ClientExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface|TransportExceptionInterface $e) {
                 throw new NotFoundHttpException($response->error->info);
             }
             
-            return $this->pdf;
+            return $this;
         }
+        
         
         /**
          * method:  setParams
@@ -73,7 +77,7 @@
          **/
         public function setPostData($key, $value = 1): self
         {
-            $this->params[$key] = $value;
+            $this->postData[$key] = $value;
             return $this;
         }
         
@@ -151,6 +155,11 @@
             return $this->pdf;
         }
         
+        public function getRawResponse(): string
+        {
+            return $this->response;
+        }
+        
         public function file_pdf($file_name = ''): BinaryFileResponse
         {
             $file_name = (empty($file_name)) ? 'pdf' : $file_name;
@@ -175,6 +184,8 @@
             // Retourner le fichier en tant que réponse
             return new BinaryFileResponse($pdfFilePath);
         }
+        
+        
         
         private function getSchema(): string | array | null
         {

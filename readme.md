@@ -79,10 +79,11 @@ then add in config/packages/neox_to_pdf.yaml
 ````
 
 ## build in command :
-  - display_pdf   | give back Pdf in browser
-  - download_pdf  | download Pdf file
-  - getStream     | get as string
-  - file_pdf      | get as BinaryFileResponse
+  - display_pdf     | give back Pdf in browser
+  - download_pdf    | download Pdf file
+  - getStream       | get as string
+  - getRawResponse  | get as response form provider
+  - file_pdf        | get as BinaryFileResponse
 
 ## Advance use "custom" provider !!
 

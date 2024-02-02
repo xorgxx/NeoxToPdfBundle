@@ -14,6 +14,6 @@
         public function buildRequest(): string;
         
         // Send to API it will give back a string
-        public function sendRequest(string $request, array $postData): string;
+        public function sendRequest(string $request, array $postData): neoxToPdfAbstract;
         
     }

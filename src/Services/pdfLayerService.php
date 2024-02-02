@@ -22,7 +22,7 @@
          */
         public function htmlConverter(bool $redirect = false): mixed
         {
-            if (empty($this->params['document_url']) and empty($this->params['document_html'])) {
+            if (empty($this->postData['document_url']) and empty($this->postData['document_html'])) {
                 throw new NotFoundHttpException('A document source must be provided');
             }
             
@@ -60,7 +60,7 @@
             return $this->build_request();
         }
         
-        public function sendRequest(string $request, array $postData): string
+        public function sendRequest(string $request, array $postData): neoxToPdfAbstract
         {
             return $this->doApi($request, $postData);
         }
