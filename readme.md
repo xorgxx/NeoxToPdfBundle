@@ -77,9 +77,83 @@ then add in config/packages/neox_to_pdf.yaml
   - getStream     | get as string
   - file_pdf      | get as BinaryFileResponse
 
+## Advance use "custom" provider !!
+
+`````php 
+  neox_to_pdf:
+      ...
+      # path to class customs
+      directory_class: "App/Services"
+      # Important | [pdfLayerAService] name have to be same "format" as the class name without "Service" ex: pdfLayerA not PdfLayera
+      customs:
+          pdfLayerA: "%env(PDFLAYER_DSN)%"
+    ...
+
+`````
+Structure Class custom provider
+`````php 
+<?php
+    
+    namespace App\Services;
+    
+    use NeoxToPdf\NeoxToPdfBundle\NeoxPdf\neoxPdfInterface;
+    use NeoxToPdf\NeoxToPdfBundle\NeoxPdf\NeoxToPdfAbstract;
+    use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+    use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+    use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+    use Symfony\Contracts\HttpClient\HttpClientInterface;
+    
+    class pdfLayerAService extends NeoxToPdfAbstract implements neoxPdfInterface
+    {
+        public readonly HttpClientInterface $httpClient;
+        
+        /**
+         * method:  class construction
+         * You can do your logic here!!.
+         *
+         * @param bool $redirect
+         *
+         * @return mixed
+         * @throws TransportExceptionInterface
+         */
+        public function htmlConverter(bool $redirect = false): mixed
+        {
+            ...
+            $request        = $this->buildRequest();
+            ...
+            $t = $this->sendRequest($request, $postData);
+            
+            return $this;
+        }
+        
+        // Process to convert any (support) to pdf
+        public function anyConverter(): mixed
+        {
+            // TODO: Implement anyConverter() method. Woooooooonnnn !
+        }
+        
+        public function buildRequest(): string
+        {
+            return $this->build_request();
+        }
+        
+        /**
+         * @throws TransportExceptionInterface
+         */
+        public function sendRequest(string $request, array $postData): string
+        {
+            return $this->doApi($request, $postData);
+        }
+    }
+    
+    // This class have to extends NeoxToPdfAbstract and implements neoxPdfInterface
+    // $this->buildRequest() will construct base on Dsn request API
+    // $this->sendRequest($request, $postData) will send Api request : Note that this have to return string !!
+
+`````
 
 ## Contributing
-If you want to contribute \(thank you!\) to this bundle, here are some guidelines:
+If you want to contribute (thank you!) to this bundle, here are some guidelines:
 
 * Please respect the [Symfony guidelines](http://symfony.com/doc/current/contributing/code/standards.html)
 * Test everything! Please add tests cases to the tests/ directory when:

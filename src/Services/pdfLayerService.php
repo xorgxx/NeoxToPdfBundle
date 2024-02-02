@@ -2,17 +2,16 @@
     
     namespace NeoxToPdf\NeoxToPdfBundle\Services;
     
+    use NeoxToPdf\NeoxToPdfBundle\NeoxPdf\neoxPdfInterface;
     use NeoxToPdf\NeoxToPdfBundle\NeoxPdf\NeoxToPdfAbstract;
     use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
     use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
     use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
     use Symfony\Contracts\HttpClient\HttpClientInterface;
     
-    class pdfLayerService extends NeoxToPdfAbstract
+    class pdfLayerService extends NeoxToPdfAbstract implements neoxPdfInterface
     {
-        
         public readonly HttpClientInterface $httpClient;
-        
         
         /**
          * method:  class construction
@@ -21,31 +20,13 @@
          * @param HttpClientInterface   $httpClient
          * @param ParameterBagInterface $parameterBag
          */
-        public function __construct(HttpClientInterface $httpClient, ParameterBagInterface $parameterBag)
+        public function htmlConverter(bool $redirect = false): mixed
         {
-            parent::__construct($httpClient, $parameterBag);
-        }
-        
-        /**
-         * method:  convert
-         * usage:   convert([redirect=false]);
-         * params:  redirect = redirect browser to api
-         * This method will query the api to convert the html to pdf.
-         * If redirect is set to true, browser will be redirected directly to api.
-         *
-         * @param bool $redirect
-         *
-         * @return pdfLayerService
-         * @throws TransportExceptionInterface
-         */
-        public function convert(bool $redirect = false): self
-        {
-            
             if (empty($this->params['document_url']) and empty($this->params['document_html'])) {
                 throw new NotFoundHttpException('A document source must be provided');
             }
             
-            $request        = $this->build_request();
+            $request        = $this->buildRequest();
             
             /** In cas we need to add a secret in params */
             // $secret_key = md5($url . $this->secret_keyword);
@@ -62,9 +43,24 @@
                 exit;
             }
             
-            $this->doApi($request, $postData);
+            $this->sendRequest($request, $postData);
             
             return $this;
         }
         
+        // Process to convert any (support) to pdf
+        public function anyConverter(): mixed
+        {
+            // TODO: Implement anyConverter() method. Woooooooonnnn !
+        }
+        
+        public function buildRequest(): string
+        {
+            return $this->build_request();
+        }
+        
+        public function sendRequest(string $request, array $postData): string
+        {
+            return $this->doApi($request, $postData);
+        }
     }

@@ -28,7 +28,7 @@
             // get class name
             $fullClassName      = get_class($this);
             $className          = str_replace('Service', '', basename(str_replace('\\', '/', $fullClassName)));
-            $this->schema       = strtolower($className);
+            $this->schema       = $className;  // strtolower()
             
             $dsn    = $this->getSchema();
             $dsn    = new Dsn($dsn);
@@ -46,7 +46,7 @@
          * @return void
          * @throws TransportExceptionInterface
          */
-        protected function doApi(string $request, array $postData): void
+        protected function doApi(string $request, array $postData): string
         {
             $response = $this->httpClient->request('POST', $request, [
                 'body' => http_build_query($postData),
@@ -57,6 +57,8 @@
             } catch (ClientExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface|TransportExceptionInterface $e) {
                 throw new NotFoundHttpException($response->error->info);
             }
+            
+            return $this->pdf;
         }
         
         /**
@@ -160,7 +162,12 @@
         
         private function getSchema(): string | array | null
         {
-            $schemas = $this->parameterBag->get("neox_to_pdf.services");
-            return $schemas[$this->schema] ?? null;
+            $services       = $this->parameterBag->get("neox_to_pdf.services", []);
+            $customs        = $this->parameterBag->get("neox_to_pdf.customs", []);
+            $schema         = array_merge($services, $customs);
+            
+            return $schema[$this->schema] ?? null;
+//            $schemas = $this->parameterBag->get("neox_to_pdf.services");
+//            return $schemas[$this->schema] ?? null;
         }
     }
