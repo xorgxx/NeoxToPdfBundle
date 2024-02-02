@@ -21,7 +21,7 @@
          **/
         protected array $postData   = array();
         protected array $query      = array();
-        protected TraceableResponse $response;
+        protected mixed $response;
         protected string $pdf;
         
         public function __construct(private readonly HttpClientInterface $httpClient, private readonly ParameterBagInterface $parameterBag) {}
@@ -156,7 +156,7 @@
             return $this->pdf;
         }
         
-        public function getRawResponse(): TraceableResponse
+        public function getRawResponse(): mixed
         {
             return $this->response;
         }
