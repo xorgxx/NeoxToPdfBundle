@@ -67,6 +67,13 @@ then add in config/packages/neox_to_pdf.yaml
               ->setParams('test',true)
               ->convert()
               ->display_pdf();
+              
+          // Advance** (read Bellow) section ADVANCE
+          $pdf = $neoxToPdf->customService("pdfLayerA")
+              ->setParams('document_html',"Neox Wooooonnnn convert to pdf")
+              ->setParams('test',true)
+              ->convert()
+              ->display_pdf();
       }
   }
 ````
