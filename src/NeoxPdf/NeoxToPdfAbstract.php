@@ -11,6 +11,7 @@
     use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
     use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
     use Symfony\Contracts\HttpClient\HttpClientInterface;
+    use Symfony\Component\HttpClient\Response\TraceableResponse;
     
     Abstract class NeoxToPdfAbstract
     {
@@ -20,7 +21,7 @@
          **/
         protected array $postData   = array();
         protected array $query      = array();
-        protected Response $response;
+        protected TraceableResponse $response;
         protected string $pdf;
         
         public function __construct(readonly HttpClientInterface $httpClient, readonly ParameterBagInterface $parameterBag) {}
@@ -55,7 +56,7 @@
             ]);
             
             try {
-                $this->Response     = $response;
+                $this->response     = $response;
                 $this->pdf          = $response->getContent();
                 
             } catch (ClientExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface|TransportExceptionInterface $e) {
@@ -155,7 +156,7 @@
             return $this->pdf;
         }
         
-        public function getRawResponse(): string
+        public function getRawResponse(): TraceableResponse
         {
             return $this->response;
         }
