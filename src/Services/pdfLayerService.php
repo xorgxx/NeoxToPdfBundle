@@ -33,8 +33,8 @@
             // $this->params['secret_key'] = $secret_key;
             
             $keysToCheck    = ['document_html', 'header_html', 'footer_html'];
-            $postData       = array_filter($this->params, function ($key) use ($keysToCheck) {
-                return in_array($key, $keysToCheck) && !empty($this->params[$key]);
+            $postData       = array_filter($this->postData, function ($key) use ($keysToCheck) {
+                return in_array($key, $keysToCheck) && !empty($this->postData[$key]);
             }, ARRAY_FILTER_USE_KEY);
             
             // !!!
@@ -52,6 +52,7 @@
         public function anyConverter(): mixed
         {
             // TODO: Implement anyConverter() method. Woooooooonnnn !
+            return $this;
         }
         
         public function buildRequest(): string

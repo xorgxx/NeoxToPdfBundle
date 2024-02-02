@@ -18,7 +18,8 @@
         /**
          * API key/value pair params
          **/
-        protected array $params = array();
+        protected array $postData   = array();
+        protected array $query      = array();
         protected string $pdf;
         
         public function __construct(readonly HttpClientInterface $httpClient, readonly ParameterBagInterface $parameterBag) {}
@@ -34,7 +35,7 @@
             $dsn    = new Dsn($dsn);
             
             // Build the query string
-            $query  = http_build_query($this->params, '', '&', PHP_QUERY_RFC3986);
+            $query  = http_build_query($this->query, '', '&', PHP_QUERY_RFC3986);
             return "https://" . $dsn->getHost() . $dsn->getPath() . '?access_key=' .$dsn->getUser() .'&' . $query;
 
         }
@@ -70,9 +71,24 @@
          *
          * @returns: null
          **/
-        public function setParams($key, $value = 1): self
+        public function setPostData($key, $value = 1): self
         {
             $this->params[$key] = $value;
+            return $this;
+        }
+        
+        /**
+         * method:  setParams
+         * usage:   setParams(string key, string value);
+         * params:  key = key of the params key/value pair
+         * value =  value of the params key/value pair
+         * add or change the params key/value pair specified.
+         *
+         * @returns: null
+         **/
+        public function setQuery($key, $value = 1): self
+        {
+            $this->query[$key] = $value;
             return $this;
         }
         
