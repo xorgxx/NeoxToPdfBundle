@@ -93,10 +93,18 @@ then add in config/packages/neox_to_pdf.yaml
       directory_class: "App/Services"
       # Important | [pdfLayerAService] name have to be same "format" as the class name without "Service" ex: pdfLayerA not PdfLayera
       customs:
-          pdfLayerA: "%env(PDFLAYER_DSN)%"
+          pdfLayerA: "%env(PDFLAYERA_DSN)%"
     ...
 
 `````
+````php 
+    ###> NeoxToPdf ###
+      ...
+      PDFLAYERA_DSN=pdflayera://opps:[api-key]@api.pdflayer.com/api/convert
+      ...
+    ###> NeoxToPdf ###
+````
+
 Structure Class custom provider
 `````php 
 <?php
