@@ -32,10 +32,7 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('directory_save')->defaultValue("/public/neoxPdf/")->end()
                 ->scalarNode('directory_class')->defaultValue(null)->end()
                 ->arrayNode('customs')->scalarPrototype()->end()->end()
-                ->arrayNode('services')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('pdflayer')->defaultValue("")->end()
-                    ->end()
+                ->arrayNode('services')->scalarPrototype()->end()->end()
                 ->end() // template
             ->end()
         ;
