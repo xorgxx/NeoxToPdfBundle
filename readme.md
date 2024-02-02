@@ -86,6 +86,7 @@ then add in config/packages/neox_to_pdf.yaml
 
 ## Advance use "custom" provider !!
 
+in config/packages/neox_to_pdf.yaml
 `````php 
   neox_to_pdf:
       ...
@@ -97,6 +98,7 @@ then add in config/packages/neox_to_pdf.yaml
     ...
 
 `````
+.env File
 ````php 
     ###> NeoxToPdf ###
       ...
