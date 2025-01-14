@@ -87,7 +87,7 @@
         public function getRequiredOption(string $key): mixed
         {
             if (!\array_key_exists($key, $this->options) || '' === trim($this->options[$key])) {
-                throw new MissingRequiredOptionException($key);
+                return ""; #throw new MissingRequiredOptionException($key);
             }
             
             return $this->options[$key];
